@@ -1,0 +1,23 @@
+@use '../abstracts/' as *;
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb-clr) var(--scrollbar-track-clr);
+}
+
+::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-clr);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--scrollbar-track-clr);
+  border-radius: 5px;
+}
+
+html {
+  scrollbar-gutter: stable;
+}

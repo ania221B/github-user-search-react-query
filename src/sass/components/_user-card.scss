@@ -1,0 +1,40 @@
+@use '../abstracts/' as *;
+
+.user-card {
+  background-color: var(--profile-card-bg);
+  box-shadow: var(--box-shadow);
+  padding: $card-padding;
+  &__overview {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem 0;
+
+    .no-info,
+    .no-info svg path {
+      opacity: 0.5;
+    }
+
+    @include mq(large) {
+      grid-template-columns: 7.3125rem 1fr;
+      gap: 2rem clamp(1.2rem, 1rem + 3vw, 2.6rem);
+
+      &__header {
+        grid-column: 1 / -1;
+      }
+
+      & > *:not(&__header) {
+        grid-column: 2;
+      }
+    }
+  }
+  &__repos {
+    max-block-size: var(--card-content-height);
+    overflow-y: scroll;
+    padding-inline-end: 1rem;
+    h3 {
+      font-size: fs(800);
+      font-weight: $fw-700;
+      color: var(--text-accent-clr);
+    }
+  }
+}

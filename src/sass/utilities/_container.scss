@@ -1,0 +1,22 @@
+@use '../abstracts/' as *;
+
+.container {
+  --padding-inline: 1.5em;
+  --max-width: #{$container-max-width};
+  width: min(100% - calc(var(--padding-inline) * 2), var(--max-width));
+  margin-inline: auto;
+
+  @include mq(medium) {
+    --padding-inline: 7.5em;
+  }
+}
+
+.container[data-container='small'] {
+  --max-width: #{$container-max-width-small};
+}
+.container[data-container='large'] {
+  --max-width: #{$container-max-width-large};
+}
+.container[data-container='full-bleed'] {
+  --max-width: #{$container-max-width-full-bleed};
+}

@@ -1,0 +1,42 @@
+@use 'sass:map';
+@use 'color-palette' as *;
+@use 'typography' as *;
+@use 'sizes' as *;
+@use 'themes' as *;
+
+@function clr($color, $shade) {
+  @if map.has-key($colors, $color, $shade) {
+    @return map.get($colors, $color, $shade);
+  } @else {
+    @error '$colors does not have that color!';
+  }
+}
+
+@function fs($font-size) {
+  @if map.has-key($font-sizes, $font-size) {
+    @return map.get($font-sizes, $font-size);
+  } @else {
+    @error '$font-sizes does not have that size!';
+  }
+}
+
+@function size($size) {
+  @if map.has-key($sizes, $size) {
+    @return map.get($sizes, $size);
+  } @else {
+    @error '$sizes does not have that size!';
+  }
+}
+
+@function themed-color($theme, $key, $opacity: 1) {
+  @if map.has-key($themes, $theme) {
+    $theme-map: map.get($themes, $theme);
+    @if map.has-key($theme-map, $key) {
+      @return rgba(map.get($theme-map, $key), $opacity);
+    } @else {
+      @error "Key '#{$key}' not found in '#{$theme}' theme.";
+    }
+  } @else {
+    @error "Theme '#{$theme}' not found in themes map.";
+  }
+}

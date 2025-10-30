@@ -1,0 +1,19 @@
+@use '../abstracts/' as *;
+
+.stats-card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0 1.5em;
+  text-align: center;
+  padding: var(--_stats-padding, 1.5rem);
+  background-color: var(--_stats-bg, var(--stats-card-bg));
+
+  dd {
+    grid-row: 2;
+    color: var(--text-accent-clr);
+  }
+
+  @include mq(medium) {
+    text-align: left;
+  }
+}

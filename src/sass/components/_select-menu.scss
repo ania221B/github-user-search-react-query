@@ -1,0 +1,93 @@
+@use '../abstracts/' as *;
+
+.select-menu-wrapper {
+  --_btn-size: 2.6rem;
+  position: relative;
+  border: none;
+
+  border: 2px solid var(--select-menu-br);
+  border-radius: 8px;
+  overflow: hidden;
+  isolation: isolate;
+
+  &:focus-within {
+    border: 2px solid var(--select-menu-br-focus);
+  }
+}
+
+.select-menu-wrapper__arrow {
+  position: absolute;
+  inset: 0 0 0 auto;
+
+  width: var(--_btn-size);
+  height: 100%;
+
+  display: grid;
+  place-content: center;
+
+  text-align: center;
+  transition: opacity 400ms ease-in-out;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+
+  svg {
+    display: block;
+    width: 1.25em;
+    height: 1.25em;
+    pointer-events: none;
+    transform: translateY(2px);
+
+    stroke: white;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+
+    width: var(--_btn-size);
+
+    background-color: var(--select-btn-bg);
+    opacity: 1;
+    transition: opacity 400ms ease-in-out;
+    z-index: -1;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+
+    width: var(--_btn-size);
+
+    background-color: var(--select-btn-bg-hover);
+    opacity: 0;
+    transition: opacity 400ms ease-in-out;
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+.select-menu-wrapper:hover .select-menu-wrapper__arrow::before {
+  opacity: 0;
+}
+.select-menu-wrapper:hover .select-menu-wrapper__arrow::after {
+  opacity: 1;
+}
+
+.select-menu {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  background-color: var(--profile-card-bg);
+  color: currentColor;
+  padding-block: 0.5rem;
+  padding-inline-start: 1em;
+  padding-inline-end: calc(var(--_btn-size) + 0.5em);
+  border-radius: 8px 8px 0 0;
+
+  border: none;
+  outline: none;
+  cursor: pointer;
+}

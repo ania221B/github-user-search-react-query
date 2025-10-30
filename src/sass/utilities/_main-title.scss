@@ -1,0 +1,7 @@
+@use '../abstracts/' as *;
+
+.main-title {
+  font-size: fs(1000);
+  font-weight: $fw-700;
+  color: var(--text-accent-clr);
+}

@@ -1,0 +1,41 @@
+@use '../abstracts/' as *;
+
+.repo-list {
+  margin: 0;
+  padding: 0;
+  margin-top: 2rem;
+
+  &__item {
+    font-size: fs(200);
+    background-color: var(--stats-card-bg);
+    padding: 1.5rem;
+
+    display: grid;
+
+    h4 {
+      font-size: fs(600);
+      font-weight: $fw-700;
+    }
+
+    a {
+      color: var(--accent-clr);
+      text-decoration: none;
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+      }
+    }
+
+    article {
+      display: grid;
+      gap: 0.75rem;
+    }
+  }
+
+  .stats-card {
+    --_stats-padding: 1rem;
+    --_stats-bg: transparent;
+    border: 1px solid var(--search-btn-hover-bg);
+    border-radius: 15px;
+  }
+}

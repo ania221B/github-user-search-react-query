@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use 'sass:math';
+@use 'sass:list';
+@use 'breakpoints' as *;
+@use 'themes' as *;
+@use 'functions' as *;
+
+@mixin mq($size) {
+  @if (map.has-key($breakpoints, $size)) {
+    $breakpoint: map.get($breakpoints, $size);
+    @media screen and (min-width: $breakpoint) {
+      @content;
+    }
+  } @else if (meta.type-of($size) == number) {
+    @if (math.is-unitless($size)) {
+      @error 'Provided value of #{$size} has no unit';
+    } @else {
+      $breakpoint: $size;
+      @media screen and (min-width: $breakpoint) {
+        @content;
+      }
+    }
+  } @else {
+    @error "Provided value of '#{$size}' is not in the $breakponts map. Available keys: #{map.keys($breakpoints)}. Use a value from $breakpoints map or a number with a unit";
+  }
+}
+
+@mixin themify($properties...) {
+  @each $theme, $map in $themes {
+    @each $property, $keys in $properties {
+      $keys-to-check: if(meta.type-of($keys) == 'list', $keys, ($keys));
+      @each $key in $keys-to-check {
+        @if not map.has-key($map, $key) {
+          @error "The key '#{$key}' is not in the '#{$theme}' theme map. Available keys: #{map.keys($map)}.";
+        }
+      }
+    }
+    .theme-#{$theme} & {
+      @each $property, $keys in $properties {
+        @if meta.type-of($keys) == 'list' {
+          $values: ();
+          @each $key in $keys {
+            $values: list.append($values, map.get($map, $key));
+          }
+          #{$property}: $values;
+        } @else {
+          #{$property}: map.get($map, $keys);
+        }
+      }
+    }
+  }
+}
+
+@mixin themify-body($properties...) {
+  @each $theme, $map in $themes {
+    @each $property, $keys in $properties {
+      $keys-to-check: if(meta.type-of($keys) == 'list', $keys, ($keys));
+      @each $key in $keys-to-check {
+        @if not map.has-key($map, $key) {
+          @error "The key '#{$key}' is not in the '#{$theme}' theme. Available keys: #{map.keys($map)}.";
+        }
+      }
+    }
+    .theme-#{$theme} {
+      @each $property, $keys in $properties {
+        @if meta.type-of($keys) == 'list' {
+          $values: ();
+          @each $key in $keys {
+            $values: list.append($values, map.get($map, $key));
+          }
+          #{$property}: $values;
+        } @else {
+          #{$property}: map.get($map, $keys);
+        }
+      }
+    }
+  }
+}
+
+@mixin themed-gradient($clr, $direction: 90deg) {
+  $gradient-alphas: 0, 0.05, 0.25, 0.5, 0.25, 0.05, 0;
+  $stops: ();
+
+  @each $alpha in $gradient-alphas {
+    $stops: list.append($stops, rgba($clr, $alpha), comma);
+  }
+  background-image: linear-gradient($direction, $stops...);
+}

@@ -1,0 +1,129 @@
+@use '../abstracts/' as *;
+
+.card-skeleton {
+  --img-size: 4rem;
+  --user-info-width: 8rem;
+  --user-info-width-small: 6rem;
+  --user-info-height: 0.65rem;
+  --user-stats-width: calc(100% - $card-padding);
+  --user-stats-height: 5rem;
+  --user-link-width: calc(100% - ($card-padding * 4));
+  --user-link-height: 0.65rem;
+  --animation-time: 2400ms;
+
+  &__img,
+  &__user-info,
+  &__stats,
+  &__link {
+    background-color: var(--skeleton-primary-clr);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 240px;
+
+      animation: loading var(--animation-time) infinite;
+      @include themed-gradient(var(--skeleton-gradient-clr));
+    }
+  }
+
+  &__img {
+    width: var(--img-size);
+    height: var(--img-size);
+    border-radius: 50%;
+  }
+
+  &__user-info {
+    width: var(--user-info-width);
+    height: var(--user-info-height);
+    grid-column: 2;
+
+    &--small {
+      width: var(--user-info-width-small);
+    }
+
+    &:last-child {
+      width: var(--user-stats-width);
+      grid-column: 1 / span 2;
+      margin-block-start: 1.25rem;
+    }
+  }
+
+  &__stats {
+    width: var(--user-stats-width);
+    height: var(--user-stats-height);
+  }
+
+  &__links {
+    display: grid;
+    gap: 1.1875em 0;
+  }
+
+  &__link {
+    width: var(--user-link-width);
+    height: var(--user-link-height);
+  }
+
+  @include mq(large) {
+    --img-size: 7rem;
+    --user-stats-width: calc(100% - var(--img-size));
+    --user-link-width: 50%;
+
+    &__user-info:nth-child(4) {
+      grid-row: 1;
+      grid-column: 3;
+      justify-self: end;
+      align-self: start;
+    }
+    &__user-info:last-child {
+      grid-column: 2 / span 2;
+    }
+  }
+}
+
+.item-skeleton {
+  --animation-time: 1800ms;
+  padding-block: 0.75em;
+  padding-inline: 1em;
+  display: flex;
+  gap: 1.5em;
+  align-items: center;
+
+  & > * {
+    background-color: var(--skeleton-primary-clr);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+  }
+  &__img {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+  }
+  &__name {
+    width: 4em;
+    height: 0.5em;
+  }
+
+  & > *::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 40px;
+
+    animation: loading var(--animation-time) infinite;
+    @include themed-gradient(var(--skeleton-gradient-clr));
+  }
+}
+
+@keyframes loading {
+  0% {
+    transform: translate(-100%);
+  }
+  100% {
+    transform: translate(200%);
+  }
+}
