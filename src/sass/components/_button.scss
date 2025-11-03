@@ -127,7 +127,7 @@
 }
 
 .active {
-  color: var(--main-text);
+  color: var(--tab-button-text);
 
   &::after {
     opacity: 1;

@@ -13,7 +13,7 @@ function SearchBar () {
     e.preventDefault()
     setSearchError('')
     if (!searchedUser) {
-      setSearchError('Please provide a username to search')
+      setSearchError('Type a username to search')
       return
     }
 

@@ -1,7 +1,7 @@
 @use '../abstracts/' as *;
 
 .card-skeleton {
-  --img-size: 4rem;
+  --img-size: 5rem;
   --user-info-width: 8rem;
   --user-info-width-small: 6rem;
   --user-info-height: 0.65rem;
@@ -9,16 +9,32 @@
   --user-stats-height: 5rem;
   --user-link-width: calc(100% - ($card-padding * 4));
   --user-link-height: 0.65rem;
+  --repo-heading-width: 8rem;
+  --repo-heading-height: 1rem;
+  --repo-sorting-menu-item-width: calc(100% - $card-padding);
+  --repo-sorting-menu-item-height: 2rem;
+  --repo-list-width: calc(100% - $card-padding);
+  --repo-list-height: 11rem;
   --animation-time: 2400ms;
+
+  display: grid;
+  grid-auto-flow: row;
+  gap: $card-gap;
+
+  max-block-size: var(--card-content-height);
 
   &__img,
   &__user-info,
   &__stats,
-  &__link {
+  &__link,
+  &__header,
+  &__sorting-menus__item,
+  &__repo-list {
     background-color: var(--skeleton-primary-clr);
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    border-radius: 8px;
     &::before {
       content: '';
       position: absolute;
@@ -81,6 +97,21 @@
     &__user-info:last-child {
       grid-column: 2 / span 2;
     }
+  }
+
+  &__header {
+    inline-size: var(--repo-heading-width);
+    block-size: var(--repo-heading-height);
+  }
+
+  &__sorting-menus__item {
+    inline-size: var(--repo-sorting-menu-item-width);
+    block-size: var(--repo-sorting-menu-item-height);
+  }
+
+  &__repo-list {
+    inline-size: var(--repo-list-width);
+    block-size: var(--repo-list-height);
   }
 }
 

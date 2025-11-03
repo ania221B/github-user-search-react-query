@@ -1,27 +1,56 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context'
 import useUserRepos from '../hooks/useUserRepos'
 import SortingMenu from './SortingMenu'
+import ReposSkeleton from './ReposSkeleton'
 
-function UserRepos () {
+function UserRepos ({ user, height }) {
   const [sortBy, setSortBy] = useState('stars')
   const [order, setOrder] = useState('desc')
-  const { user } = useGlobalContext()
+  const { setSearchError } = useGlobalContext()
+  const [lastValidRepos, setLastValidRepos] = useState(null)
   const { data: repos, isPending, error } = useUserRepos(user, sortBy, order)
 
-  if (isPending) {
-    return <h2>loading...</h2>
-  }
-  if (error) {
-    console.log(error)
-  }
+  useEffect(() => {
+    if (repos) setLastValidRepos(repos)
+  }, [repos])
 
-  if (!repos) {
-    return <h3>No repos available</h3>
+  useEffect(() => {
+    if (error) {
+      setSearchError(
+        error.status === 404 ? 'No user found' : 'There was an error'
+      )
+    }
+  }, [error])
+
+  if (isPending) {
+    return (
+      <div
+        className='card-skeleton'
+        style={{ '--card-content-height': `${height}px` }}
+      >
+        <ReposSkeleton></ReposSkeleton>
+      </div>
+    )
+  }
+  const displayRepos = repos || lastValidRepos || []
+
+  if (!displayRepos) {
+    return (
+      <section
+        className='user-card__empty'
+        style={{ '--card-content-height': `${height}px` }}
+      >
+        <h3 className='fs-900'>No repos available</h3>
+      </section>
+    )
   }
 
   return (
-    <>
+    <section
+      className='user-card__repos'
+      style={{ '--card-content-height': `${height}px` }}
+    >
       <h3>Top 10 Repos</h3>
 
       <SortingMenu
@@ -32,7 +61,7 @@ function UserRepos () {
       ></SortingMenu>
 
       <ul className='repo-list grid-auto-fit' role='list'>
-        {repos.map(item => {
+        {displayRepos.map(item => {
           const { id, name, url, description, language, stars, forks } = item
           return (
             <li className='repo-list__item br-medium' key={id}>
@@ -58,7 +87,7 @@ function UserRepos () {
           )
         })}
       </ul>
-    </>
+    </section>
   )
 }
 export default UserRepos

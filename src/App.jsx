@@ -4,6 +4,8 @@ import SearchBar from './components/SearchBar'
 import UserCard from './components/UserCard'
 import { useGlobalContext } from './context'
 import TabButtons from './components/TabButtons'
+import CardSkeleton from './components/CardSkeleton'
+import ReposSkeleton from './components/ReposSkeleton'
 
 function App () {
   const { setPreferredTheme, enableDarkMode, enableLightMode, mediaQuery } =

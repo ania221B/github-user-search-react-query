@@ -1,18 +1,16 @@
 import { useGlobalContext } from '../context'
-import UserProfile from './UserProfile'
-import UserStats from './UserStats'
-import UserInfo from './UserInfo'
 import { useEffect, useRef, useState } from 'react'
-import CardSkeleton from './CardSkeleton'
-import useUserProfile from '../hooks/useUserProfile'
 import UserRepos from './UserRepos'
+import UserOverview from './UserOverview'
+import useUserProfile from '../hooks/useUserProfile'
 
 function UserCard () {
-  const { user, setSearchError, activeTab } = useGlobalContext()
+  const { user, activeTab, setSearchError } = useGlobalContext()
+  const [cardHeight, setCardHeight] = useState(0)
   const [lastValidUser, setLastValidUser] = useState(null)
   const { data: userProfile, isPending, error } = useUserProfile(user)
-  const [cardContentHeight, setCardContentHeight] = useState(0)
-  const cardContentRef = useRef(null)
+  const displayUser = userProfile || lastValidUser
+  const cardRef = useRef(null)
 
   useEffect(() => {
     if (userProfile) setLastValidUser(userProfile)
@@ -27,57 +25,29 @@ function UserCard () {
   }, [error])
 
   useEffect(() => {
-    if (!cardContentRef.current) return
+    if (!cardRef.current || !displayUser) return
 
     function updateHeight (entries) {
       const { height } = entries[0].contentRect
-      setCardContentHeight(height)
+      if (activeTab === 'overview' || cardHeight === 0) {
+        setCardHeight(height)
+      }
     }
 
     const observer = new ResizeObserver(updateHeight)
-    observer.observe(cardContentRef.current)
+    observer.observe(cardRef.current)
 
-    return () => observer.disconnect()
-  }, [userProfile, activeTab])
+    return () => {
+      observer.disconnect()
+    }
+  }, [activeTab, displayUser])
 
-  if (isPending) {
-    return <CardSkeleton></CardSkeleton>
-  }
-
-  if (error) {
-    return (
-      <article className='user-card br-medium'>
-        {activeTab === 'overview' ? (
-          <section className='user-card__overview' ref={cardContentRef}>
-            <UserProfile {...lastValidUser}></UserProfile>
-            <UserStats {...lastValidUser}></UserStats>
-            <UserInfo {...lastValidUser}></UserInfo>
-          </section>
-        ) : (
-          <section className='user-card__repos'>
-            <UserRepos></UserRepos>
-          </section>
-        )}
-      </article>
-    )
-  }
-
-  console.log(cardContentHeight)
   return (
-    <article className='user-card br-medium'>
+    <article className='user-card br-medium' ref={cardRef}>
       {activeTab === 'overview' ? (
-        <section className='user-card__overview' ref={cardContentRef}>
-          <UserProfile {...userProfile}></UserProfile>
-          <UserStats {...userProfile}></UserStats>
-          <UserInfo {...userProfile}></UserInfo>
-        </section>
+        <UserOverview user={displayUser} loading={isPending}></UserOverview>
       ) : (
-        <section
-          className='user-card__repos'
-          style={{ '--card-content-height': `${cardContentHeight}px` }}
-        >
-          <UserRepos></UserRepos>
-        </section>
+        <UserRepos user={displayUser.username} height={cardHeight}></UserRepos>
       )}
     </article>
   )

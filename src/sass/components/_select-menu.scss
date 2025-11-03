@@ -38,7 +38,7 @@
     pointer-events: none;
     transform: translateY(2px);
 
-    stroke: white;
+    stroke: var(--dropdown-arrow);
   }
 
   &::before {

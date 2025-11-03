@@ -1,6 +1,6 @@
 function SortingMenu ({ sortBy, setSortBy, order, setOrder }) {
   return (
-    <div className='flow margin-block-start-16'>
+    <div className='flow'>
       <div className='sorting-menu'>
         <label htmlFor='repo-sorting' className='repo__label'>
           Sort:
