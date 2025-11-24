@@ -9,7 +9,7 @@ function UserCard () {
   const [cardHeight, setCardHeight] = useState(0)
   const [lastValidUser, setLastValidUser] = useState(null)
   const { data: userProfile, isPending, error } = useUserProfile(user)
-  const displayUser = userProfile || lastValidUser
+  const displayUser = userProfile || lastValidUser || {}
   const cardRef = useRef(null)
 
   useEffect(() => {
@@ -18,9 +18,7 @@ function UserCard () {
 
   useEffect(() => {
     if (error) {
-      setSearchError(
-        error.status === 404 ? 'No user found' : 'There was an error'
-      )
+      setSearchError(error.status === 404 ? 'No results' : 'Error!')
     }
   }, [error])
 

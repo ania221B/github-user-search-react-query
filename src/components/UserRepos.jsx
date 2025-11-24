@@ -18,9 +18,7 @@ function UserRepos ({ user, height }) {
 
   useEffect(() => {
     if (error) {
-      setSearchError(
-        error.status === 404 ? 'No user found' : 'There was an error'
-      )
+      setSearchError(error.status === 404 ? 'No results' : 'Error!')
     }
   }, [error])
 
