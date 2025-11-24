@@ -4,10 +4,10 @@
  * @returns Object with normalized suggestion data from the api
  */
 function normalizeSuggestions (items) {
-  if (!items) return null
+  if (!Array.isArray(items)) return []
   return items.map(item => {
     return {
-      id: Number.isInteger(item.id) ? item.id : 0,
+      id: Number.isFinite(item.id) ? item.id : 0,
       image: typeof item?.avatar_url === 'string' ? item.avatar_url : '',
       username: typeof item?.login === 'string' ? item.login : ''
     }

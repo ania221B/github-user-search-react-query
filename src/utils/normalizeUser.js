@@ -6,7 +6,7 @@ import formatDate from './formatDate'
  * @returns Object with normalized user data from the api
  */
 function normalizeUser (data) {
-  if (!data) return null
+  if (!data) return {}
 
   return {
     image: typeof data?.avatar_url === 'string' ? data.avatar_url : '',
@@ -15,9 +15,9 @@ function normalizeUser (data) {
     joinDate:
       typeof data?.created_at === 'string' ? formatDate(data.created_at) : '',
     bio: typeof data?.bio === 'string' ? data.bio : '',
-    repos: Number.isInteger(data?.public_repos) ? data.public_repos : 0,
-    followers: Number.isInteger(data?.followers) ? data.followers : 0,
-    following: Number.isInteger(data?.following) ? data.following : 0,
+    repos: Number.isFinite(data?.public_repos) ? data.public_repos : 0,
+    followers: Number.isFinite(data?.followers) ? data.followers : 0,
+    following: Number.isFinite(data?.following) ? data.following : 0,
     location: typeof data?.location === 'string' ? data.location : '',
     blog: typeof data?.blog === 'string' ? data.blog : '',
     twitter:
