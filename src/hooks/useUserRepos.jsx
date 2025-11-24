@@ -7,7 +7,8 @@ function useUserRepos (username, sortBy = 'stars', order = 'desc') {
     queryKey: ['repos', username, sortBy, order],
     queryFn: () => fetchRepos(username, sortBy, order),
     select: normalizeRepos,
-    enabled: !!username
+    enabled: !!username,
+    retry: false
   })
   return { data, isPending, error }
 }
