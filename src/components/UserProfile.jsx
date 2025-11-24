@@ -1,4 +1,5 @@
 function UserProfile ({ image, name, username, joinDate, bio }) {
+  const isLongUnbroken = bio && !bio.includes(' ') && bio.length > 30
   return (
     <header className='user-card__overview__header profile-card'>
       <div className='profile-card__img'>
@@ -12,7 +13,14 @@ function UserProfile ({ image, name, username, joinDate, bio }) {
         Joined <span>{joinDate ? joinDate : `Not Available`}</span>
       </p>
       {bio ? (
-        <p className='profile-card__bio'>{bio}</p>
+        <p
+          className={`profile-card__bio ${
+            isLongUnbroken ? 'force-wrap-text' : undefined
+          }`}
+        >
+          {' '}
+          {bio}
+        </p>
       ) : (
         <p className='profile-card__bio no-info'>This profile has no bio</p>
       )}

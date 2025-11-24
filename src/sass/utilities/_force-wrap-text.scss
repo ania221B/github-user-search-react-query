@@ -1,0 +1,7 @@
+@use '../abstracts/' as *;
+
+.force-wrap-text {
+  word-break: break-all;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
