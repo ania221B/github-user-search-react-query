@@ -39,11 +39,12 @@
   font-weight: $fw-700;
   border-radius: 10px;
   padding-block: 1.1125em;
-  padding-inline: 1.5em;
+  padding-inline: var(--padding-inline);
   background-color: var(--search-btn-bg);
   color: var(--search-btn-text);
   position: relative;
   isolation: isolate;
+  @include fluid-clamp($button-padding, true, padding-inline);
 
   &::before {
     content: '';

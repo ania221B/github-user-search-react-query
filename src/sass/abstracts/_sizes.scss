@@ -12,8 +12,21 @@ $sizes: (
 
 $padding-hero: clamp(15rem, 15vh, 20rem);
 $padding-section: clamp(5rem, 10vh, 7rem);
+$button-padding: (
+  small: 1.125,
+  medium: 1.5,
 
-$card-padding: clamp(1.5rem, 1.5rem + 3vw, 2.95rem);
+  min-width: 23.4375,
+  mid-width: 48,
+);
+$card-padding: (
+  small: 1.5,
+  medium: 2.5,
+  large: 3,
+  min-width: 23.4375,
+  mid-width: 48,
+  max-width: 90,
+);
 $card-base-width: 19rem;
 $card-gap: 2rem;
 

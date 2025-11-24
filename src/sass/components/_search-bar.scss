@@ -6,7 +6,7 @@
   grid-template-rows: auto 0fr 0fr;
 
   padding-block: 0.6em;
-  padding-inline: 1.5em 0.6em;
+  padding-inline: 1rem 0.6em;
   background-color: var(--search-bg);
   box-shadow: var(--box-shadow);
   will-change: grid-template-rows;
@@ -28,14 +28,16 @@
 
   .icon {
     align-self: center;
-    transform: translateY(3px);
+    display: grid;
+    width: 25px;
   }
 
   input {
+    width: 100%;
     max-width: 100%;
     background: none;
     border: none;
-    padding-inline: 0.75em;
+    padding-inline-start: 8px;
     font-size: fs(700);
     color: var(--text-input-clr);
     caret-color: var(--accent-clr);

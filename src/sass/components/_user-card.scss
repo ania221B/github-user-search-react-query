@@ -3,7 +3,15 @@
 .user-card {
   background-color: var(--profile-card-bg);
   box-shadow: var(--box-shadow);
-  padding: $card-padding;
+  padding: var(--padding);
+  @include fluid-clamp(
+    $card-padding,
+    $skip-second-range: false,
+    $property: padding
+  );
+  @include mq(23.4em, max-width) {
+    padding: 1rem;
+  }
   &__overview {
     display: grid;
     grid-template-columns: 1fr;
