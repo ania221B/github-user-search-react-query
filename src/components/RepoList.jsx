@@ -1,7 +1,7 @@
 import RepoListItem from './RepoListItem'
 
 function RepoList ({ repos }) {
-  if (!repos.length === 0) {
+  if (!repos || repos.length === 0) {
     return (
       <div className='repo-list'>
         <h4 className='fs-900'>No repos available</h4>
@@ -11,7 +11,7 @@ function RepoList ({ repos }) {
   return (
     <ul className='repo-list grid-auto-fit' role='list'>
       {repos.map(repo => {
-        return <RepoListItem item={repo}></RepoListItem>
+        return <RepoListItem key={repo.id} item={repo}></RepoListItem>
       })}
     </ul>
   )

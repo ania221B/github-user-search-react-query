@@ -1,7 +1,7 @@
 function RepoListItem ({ item }) {
-  const { id, name, url, description, language, stars, forks } = item
+  const { name, url, description, language, stars, forks } = item
   return (
-    <li className='repo-list__item br-medium' key={id}>
+    <li className='repo-list__item br-medium'>
       <article className='repo'>
         <h4>
           <a href={url}>{name}</a>
