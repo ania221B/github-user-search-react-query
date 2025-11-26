@@ -1,5 +1,7 @@
+import { checkLongUnbrokenText } from '../utils'
+
 function UserProfile ({ image, name, username, joinDate, bio }) {
-  const isLongUnbroken = bio && !bio.includes(' ') && bio.length > 30
+  const isLongUnbroken = checkLongUnbrokenText(bio)
   return (
     <header className='user-card__overview__header profile-card'>
       <div className='profile-card__img'>
