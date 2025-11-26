@@ -5,8 +5,13 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 0 1.5em;
   text-align: center;
-  padding: var(--_stats-padding, 1.5rem);
+  padding-block: var(--_stats-padding-block, 1.5rem);
+  padding-inline: var(--_stats-padding-inline, 1.5rem);
   background-color: var(--_stats-bg, var(--stats-card-bg));
+  @include mq(23.75em, max-width) {
+    --_stats-padding-inline: 0.85rem;
+    gap: 0 0.85rem;
+  }
 
   dd {
     grid-row: 2;

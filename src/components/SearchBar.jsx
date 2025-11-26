@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useGlobalContext } from '../context'
 import { SearchIcon } from '../icons'
 import SuggestionList from './SuggestionList'
@@ -8,6 +8,9 @@ function SearchBar () {
   const { setUser, searchError, setSearchError } = useGlobalContext()
   const [searchedUser, setSearchedUser] = useState('')
   const { data: suggestions, isPending, error } = useUserSearch(searchedUser)
+  const shortPlaceholderText = 'Search...'
+  const longPlaceholderText = 'Search GitHub username...'
+  const [placeholderText, setPlaceholderText] = useState(shortPlaceholderText)
 
   function handleSubmit (e) {
     e.preventDefault()
@@ -19,6 +22,18 @@ function SearchBar () {
 
     setUser(searchedUser.trim())
   }
+
+  useEffect(() => {
+    function updatePlaceholderText (e) {
+      if (window.innerWidth < 375) {
+        setPlaceholderText(shortPlaceholderText)
+      } else {
+        setPlaceholderText(longPlaceholderText)
+      }
+    }
+    window.addEventListener('resize', updatePlaceholderText)
+    return () => window.removeEventListener('resize', updatePlaceholderText)
+  }, [])
 
   return (
     <search>
@@ -39,7 +54,7 @@ function SearchBar () {
             name='search'
             id='search-input'
             value={searchedUser}
-            placeholder='Search GitHub username...'
+            placeholder={placeholderText}
             onChange={e => {
               setSearchError('')
               setSearchedUser(e.target.value)
