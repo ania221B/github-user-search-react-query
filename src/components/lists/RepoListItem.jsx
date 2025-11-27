@@ -1,4 +1,4 @@
-import { checkLongUnbrokenText } from '../utils'
+import { checkLongUnbrokenText } from '../../utils'
 
 function RepoListItem ({ item }) {
   const { name, url, description, language, stars, forks } = item

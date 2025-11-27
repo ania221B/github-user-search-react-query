@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../../context'
 
 function TabButtons () {
   const { activeTab, setActiveTab } = useGlobalContext()

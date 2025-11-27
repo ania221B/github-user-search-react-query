@@ -1,8 +1,7 @@
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../../context'
 import { useEffect, useRef, useState } from 'react'
-import UserRepos from './UserRepos'
-import UserOverview from './UserOverview'
-import useUserProfile from '../hooks/useUserProfile'
+import { UserRepos, UserOverview } from '../layout'
+import useUserProfile from '../../hooks/useUserProfile'
 
 function UserCard () {
   const { user, activeTab, setSearchError } = useGlobalContext()

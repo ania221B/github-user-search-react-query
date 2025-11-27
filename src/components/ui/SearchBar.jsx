@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react'
-import { useGlobalContext } from '../context'
 import { SearchIcon } from '../icons'
-import SuggestionList from './SuggestionList'
-import useUserSearch from '../hooks/useUserSearch'
+import { SuggestionList } from '../lists'
+import useUserSearch from '../../hooks/useUserSearch'
+import { useGlobalContext } from '../../context'
 
 function SearchBar () {
   const { setUser, searchError, setSearchError } = useGlobalContext()
   const [searchedUser, setSearchedUser] = useState('')
   const { data: suggestions, isPending, error } = useUserSearch(searchedUser)
+
   const shortPlaceholderText = 'Search...'
   const longPlaceholderText = 'Search GitHub username...'
   const [placeholderText, setPlaceholderText] = useState(shortPlaceholderText)

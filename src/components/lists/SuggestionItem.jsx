@@ -1,5 +1,5 @@
-import { useGlobalContext } from '../context'
-import ItemSkeleton from './ItemSkeleton'
+import { useGlobalContext } from '../../context'
+import { ItemSkeleton } from '../ui'
 
 function SuggestionItem ({ suggestion, isLoading }) {
   const { setUser } = useGlobalContext()

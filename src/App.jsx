@@ -1,11 +1,7 @@
 import { useEffect } from 'react'
-import Header from './components/Header'
-import SearchBar from './components/SearchBar'
-import UserCard from './components/UserCard'
+import { Header, UserCard } from './components/layout'
+import { SearchBar, TabButtons } from './components/ui'
 import { useGlobalContext } from './context'
-import TabButtons from './components/TabButtons'
-import CardSkeleton from './components/CardSkeleton'
-import ReposSkeleton from './components/ReposSkeleton'
 
 function App () {
   const { setPreferredTheme, enableDarkMode, enableLightMode, mediaQuery } =

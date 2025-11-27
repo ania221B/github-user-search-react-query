@@ -1,5 +1,4 @@
-import ReposSkeleton from './ReposSkeleton'
-import UserSkeleton from './UserSkeleton'
+import { ReposSkeleton, UserSkeleton } from '../ui'
 
 function CardSkeleton ({ activeTab }) {
   if (activeTab === 'repos') {

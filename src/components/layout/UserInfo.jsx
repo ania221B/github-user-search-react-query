@@ -1,5 +1,5 @@
+import { UserInfoItem } from '../data'
 import { BlogIcon, CompanyIcon, LocationIcon, TwitterIcon } from '../icons'
-import UserInfoItem from './UserInfoItem'
 
 function UserInfo ({ location, blog, twitter, company }) {
   function companyToGitHubLink (companyRaw) {

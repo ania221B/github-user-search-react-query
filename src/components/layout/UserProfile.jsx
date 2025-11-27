@@ -1,4 +1,4 @@
-import { checkLongUnbrokenText } from '../utils'
+import { checkLongUnbrokenText } from '../../utils'
 
 function UserProfile ({ image, name, username, joinDate, bio }) {
   const isLongUnbroken = checkLongUnbrokenText(bio)

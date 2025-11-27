@@ -1,7 +1,5 @@
-import UserInfo from './UserInfo'
-import UserProfile from './UserProfile'
-import UserStats from './UserStats'
-import UserSkeleton from './UserSkeleton'
+import { UserInfo, UserProfile, UserStats } from '../layout'
+import { UserSkeleton } from '../ui'
 
 function UserOverview ({ user, loading }) {
   if (loading) {

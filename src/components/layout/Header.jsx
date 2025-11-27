@@ -1,4 +1,4 @@
-import { useGlobalContext } from '../context'
+import { useGlobalContext } from '../../context'
 import { MoonIcon, SunIcon } from '../icons'
 
 function Header () {

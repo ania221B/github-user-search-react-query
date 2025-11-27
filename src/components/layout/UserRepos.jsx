@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import { useGlobalContext } from '../context'
-import useUserRepos from '../hooks/useUserRepos'
-import SortingMenu from './SortingMenu'
-import ReposSkeleton from './ReposSkeleton'
-import RepoList from './RepoList'
+import useUserRepos from '../../hooks/useUserRepos'
+import { SortingMenu } from '../data'
+import { ReposSkeleton } from '../ui'
+import { RepoList } from '../lists'
+import { useGlobalContext } from '../../context'
 
 function UserRepos ({ user, height }) {
   const [sortBy, setSortBy] = useState('stars')
