@@ -39,7 +39,7 @@ Users are able to:
 ### Links
 
 - Solution URL: [GitHub](https://github.com/ania221B/github-user-search-react-query)
-- Live Site URL: [GitHub Pages]()
+- Live Site URL: [GitHub Pages](https://ania221b.github.io/github-user-search-react-query/)
 
 ## My process
 
