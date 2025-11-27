@@ -11,7 +11,7 @@ function SearchBar () {
 
   const shortPlaceholderText = 'Search...'
   const longPlaceholderText = 'Search GitHub username...'
-  const [placeholderText, setPlaceholderText] = useState(shortPlaceholderText)
+  const [placeholderText, setPlaceholderText] = useState(longPlaceholderText)
 
   function handleSubmit (e) {
     e.preventDefault()
